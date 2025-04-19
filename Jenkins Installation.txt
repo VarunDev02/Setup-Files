@@ -1,0 +1,37 @@
+1. Install Java v11/v17
+2. Install Jenkins 
+
+
+sudo apt-get update
+sudo apt-get upgrade -y
+
+# Java v17
+sudo apt-get install openjdk-17-jdk -y
+
+# To choose the Java version if other versions is installed
+update-alternatives --config java
+
+# Vesion Check
+java --version
+
+# Jenkins Install
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" https://pkg.jenkins.io/debian binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins -y
+
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+sudo systemctl status jenkins
+
+------------------------------------------------------
+
+# Troubleshooting services on Linux
+sudo journalctl -u jenkins.service -b
+
+sudo	    -> Runs the command as root — required for system logs.
+journalctl	-> The tool for viewing systemd logs (services, boot, errors).
+-u          -> jenkins.service	Filters logs only for Jenkins — -u means "unit".
+-b	        -> Limits logs to this boot only (ignores old boots).
+
+
